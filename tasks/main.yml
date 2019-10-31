@@ -1,7 +1,7 @@
 ---
 - name: Ensure package idependent are installed.
   yum:
-    name: 
+    name:
       - pcre-devel
       - gcc -y
     update_cache: true

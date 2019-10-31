@@ -3,7 +3,7 @@
   yum:
     name:
       - pcre-devel
-      - gcc -y
+      - gcc
     update_cache: true
     state: present
   when: yum_packages_name is defined

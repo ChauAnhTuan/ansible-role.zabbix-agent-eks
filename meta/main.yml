@@ -1,0 +1,22 @@
+---
+dependencies: []
+
+galaxy_info:
+  role_name: repo_remi
+  author: ansible-role
+  description: Remi's RPM repository for RHEL/CentOS.
+  company: "ansible-role"
+  license: "license (BSD, MIT)"
+  min_ansible_version: 1.8
+  platforms:
+    - name: EL
+      versions:
+        - all
+  galaxy_tags:
+    - packaging
+    - epel
+    - repository
+    - repo
+    - redhat
+    - rhel
+    - centos

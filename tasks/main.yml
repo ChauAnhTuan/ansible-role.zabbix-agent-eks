@@ -1,0 +1,42 @@
+---
+- name: Ensure package idependent are installed.
+  yum:
+    name: "{{ yum_packages_name }}"
+    update_cache: true
+    state: present
+  when: yum_packages_name is defined
+
+- name: Ensure zabbix-agent for EKS Nodes are installed.
+  yum:
+    name: https://repo.zabbix.com/zabbix/3.2/rhel/6/x86_64/zabbix-agent-3.2.11-1.el6.x86_64.rpm
+    state: present
+
+- name: Replace Zabbix Server address
+  lineinfile:
+    path: /etc/zabbix/zabbix_agentd.conf
+    regexp: '^Server=127\.0\.0\.1'
+    line: 'Server=monitoring\.27global\.com'
+
+- name: Replace Zabbix Active address
+  lineinfile:
+    path: /etc/zabbix/zabbix_agentd.conf
+    regexp: '^ServerActive=127\.0\.0\.1'
+    line: 'ServerActive=monitoring\.27global\.com'
+
+- name: Remove hostname of Zabbix agent
+  lineinfile:
+    path: /etc/zabbix/zabbix_agentd.conf
+    regexp: '^Hostname=Zabbix server'
+    line: '# Hostname=Zabbix server'
+
+- name: Enable hostname for auto registration
+  lineinfile:
+    path: /etc/zabbix/zabbix_agentd.conf
+    regexp: '^# HostnameItem='
+    line: 'HostnameItem=system.hostname'
+
+- name: Enable uname for auto registration
+  lineinfile:
+    path: /etc/zabbix/zabbix_agentd.conf
+    regexp: '^# HostMetadataItem='
+    line: 'HostMetadataItem=system.uname'

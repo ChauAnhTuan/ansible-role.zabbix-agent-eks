@@ -1,7 +1,9 @@
 ---
 - name: Ensure package idependent are installed.
   yum:
-    name: "{{ yum_packages_name }}"
+    name: 
+      - pcre-devel
+      - gcc -y
     update_cache: true
     state: present
   when: yum_packages_name is defined

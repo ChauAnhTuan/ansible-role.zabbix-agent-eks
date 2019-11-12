@@ -1,9 +1,7 @@
 ---
 - name: Ensure package idependent are installed.
   yum:
-    name:
-      - pcre-devel
-      - gcc
+    name: "{{ yum_packages_name }}"
     update_cache: true
     state: present
   when: yum_packages_name is defined
@@ -17,13 +15,13 @@
   lineinfile:
     path: /etc/zabbix/zabbix_agentd.conf
     regexp: '^Server=127\.0\.0\.1'
-    line: 'Server=monitoring\.27global\.com'
+    line: 'Server=monitoring.27global.com'
 
 - name: Replace Zabbix Active address
   lineinfile:
     path: /etc/zabbix/zabbix_agentd.conf
     regexp: '^ServerActive=127\.0\.0\.1'
-    line: 'ServerActive=monitoring\.27global\.com'
+    line: 'ServerActive=monitoring.27global.com'
 
 - name: Remove hostname of Zabbix agent
   lineinfile:
